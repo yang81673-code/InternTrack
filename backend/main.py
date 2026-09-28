@@ -1,7 +1,16 @@
 from fastapi import FastAPI
 
+from backend import models
+from backend.database import Base, engine
 
-app = FastAPI()
+
+Base.metadata.create_all(bind=engine)
+
+
+app = FastAPI(
+    title="InternTrack API",
+    version="0.1.0"
+)
 
 
 @app.get("/")

@@ -7,6 +7,7 @@ h11==0.16.0
 idna==3.20
 pydantic==2.13.5
 pydantic_core==2.46.5
+SQLAlchemy==2.1.1
 starlette==1.7.0
 typing-inspection==0.4.4
 typing_extensions==4.16.0
