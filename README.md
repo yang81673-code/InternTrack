@@ -201,3 +201,12 @@ SQLAlchemy ORM
    ▼
 SQLite
 interntrack.db
+---
+
+## 本地运行
+
+### 1. 克隆项目
+
+```bash
+git clone https://github.com/yang81673-code/InternTrack.git
+cd InternTrack
