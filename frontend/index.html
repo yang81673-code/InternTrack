@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>InternTrack - 实习投递管理</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+</head>
+
+
+<body>
+
+    <!-- =========================
+         顶部导航栏
+    ========================== -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            InternTrack
+        </div>
+
+        <div class="nav-title">
+            实习投递管理
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         主体
+    ========================== -->
+
+    <main class="container">
+
+
+        <!-- 页面标题 -->
+
+        <section class="page-header">
+
+            <div>
+
+                <h1>
+                    我的实习投递
+                </h1>
+
+                <p>
+                    集中管理你的实习申请与求职进度
+                </p>
+
+            </div>
+
+
+            <button
+                id="addButton"
+                class="add-button"
+            >
+                ＋ 新增投递
+            </button>
+
+        </section>
+
+
+
+        <!-- =========================
+             数据统计
+        ========================== -->
+
+        <section class="stats">
+
+
+            <div class="stat-card">
+
+                <div class="stat-title">
+                    总投递
+                </div>
+
+                <div
+                    id="totalCount"
+                    class="stat-number"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+
+            <div class="stat-card">
+
+                <div class="stat-title">
+                    已投递
+                </div>
+
+                <div
+                    id="appliedCount"
+                    class="stat-number"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+
+            <div class="stat-card">
+
+                <div class="stat-title">
+                    面试中
+                </div>
+
+                <div
+                    id="interviewCount"
+                    class="stat-number"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+
+            <div class="stat-card">
+
+                <div class="stat-title">
+                    已录用
+                </div>
+
+                <div
+                    id="offerCount"
+                    class="stat-number"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+
+            <div class="stat-card">
+
+                <div class="stat-title">
+                    已拒绝
+                </div>
+
+                <div
+                    id="rejectedCount"
+                    class="stat-number"
+                >
+                    0
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================
+             投递列表
+        ========================== -->
+
+        <section class="application-section">
+
+
+<div class="section-header">
+
+    <div>
+        <h2>投递记录</h2>
+        <span>管理所有实习申请</span>
+    </div>
+
+
+    <div class="table-tools">
+
+        <input
+            type="text"
+            id="searchInput"
+            class="search-input"
+            placeholder="搜索公司或岗位..."
+        >
+
+
+        <select
+            id="statusFilter"
+            class="status-filter"
+        >
+            <option value="全部">
+                全部状态
+            </option>
+
+            <option value="已投递">
+                已投递
+            </option>
+
+            <option value="面试中">
+                面试中
+            </option>
+
+            <option value="已录用">
+                已录用
+            </option>
+
+            <option value="已拒绝">
+                已拒绝
+            </option>
+        </select>
+
+
+        <select
+            id="sortSelect"
+            class="sort-select"
+        >
+            <option value="apply_desc">
+                投递日期：最新
+            </option>
+
+            <option value="apply_asc">
+                投递日期：最早
+            </option>
+
+            <option value="updated_desc">
+                最近更新
+            </option>
+
+            <option value="company_asc">
+                公司名称
+            </option>
+        </select>
+
+    </div>
+
+</div>
+
+
+<div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>公司</th>
+
+                            <th>岗位</th>
+
+                            <th>类别</th>
+
+                            <th>城市</th>
+
+                            <th>状态</th>
+
+                            <th>投递日期</th>
+
+                            <th>来源</th>
+
+                            <th>操作</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="applicationTable">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =========================
+         新增 / 编辑投递弹窗
+    ========================== -->
+
+    <div
+        id="applicationModal"
+        class="modal"
+    >
+
+        <div class="modal-content">
+
+
+            <div class="modal-header">
+
+                <div>
+
+                    <h2 id="modalTitle">
+                        新增投递
+                    </h2>
+
+                    <p id="modalSubtitle">
+                        记录一条新的实习申请
+                    </p>
+
+                </div>
+
+
+                <button
+                    id="closeModalButton"
+                    class="close-button"
+                    type="button"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+
+            <form id="applicationForm">
+
+
+                <div class="form-grid">
+
+
+                    <div class="form-group">
+
+                        <label for="company">
+                            公司名称 *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="company"
+                            required
+                            placeholder="例如：腾讯"
+                        >
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label for="position">
+                            岗位名称 *
+                        </label>
+
+                        <input
+                            type="text"
+                            id="position"
+                            required
+                            placeholder="例如：后端开发实习生"
+                        >
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label for="category">
+                            岗位类别
+                        </label>
+
+                        <input
+                            type="text"
+                            id="category"
+                            placeholder="例如：技术"
+                        >
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label for="city">
+                            城市
+                        </label>
+
+                        <input
+                            type="text"
+                            id="city"
+                            placeholder="例如：深圳"
+                        >
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label for="status">
+                            当前状态
+                        </label>
+
+                        <select id="status">
+
+                            <option value="已投递">
+                                已投递
+                            </option>
+
+                            <option value="面试中">
+                                面试中
+                            </option>
+
+                            <option value="已录用">
+                                已录用
+                            </option>
+
+                            <option value="已拒绝">
+                                已拒绝
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label for="source">
+                            投递来源
+                        </label>
+
+                        <input
+                            type="text"
+                            id="source"
+                            placeholder="例如：官网 / Boss直聘"
+                        >
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label for="applyDate">
+                            投递日期 *
+                        </label>
+
+                        <input
+                            type="date"
+                            id="applyDate"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label for="jobUrl">
+                            岗位链接
+                        </label>
+
+                        <input
+                            type="url"
+                            id="jobUrl"
+                            placeholder="https://..."
+                        >
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label for="notes">
+                        备注
+                    </label>
+
+                    <textarea
+                        id="notes"
+                        rows="4"
+                        placeholder="例如：已完成一面，等待 HR 通知"
+                    ></textarea>
+
+                </div>
+
+
+
+                <div class="form-actions">
+
+                    <button
+                        type="button"
+                        id="cancelButton"
+                        class="cancel-button"
+                    >
+                        取消
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        id="submitButton"
+                        class="submit-button"
+                    >
+                        保存投递
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         投递详情弹窗
+    ========================== -->
+
+    <div
+        id="detailModal"
+        class="modal"
+    >
+
+        <div class="modal-content detail-modal-content">
+
+
+            <div class="modal-header">
+
+                <div>
+
+                    <h2>
+                        投递详情
+                    </h2>
+
+                    <p>
+                        查看完整的实习申请信息
+                    </p>
+
+                </div>
+
+
+                <button
+                    id="closeDetailButton"
+                    class="close-button"
+                    type="button"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+
+            <div class="detail-body">
+
+
+                <div class="detail-main">
+
+                    <div>
+
+                        <div class="detail-label">
+                            公司
+                        </div>
+
+                        <div
+                            id="detailCompany"
+                            class="detail-company"
+                        >
+                            -
+                        </div>
+
+                    </div>
+
+
+                    <div>
+
+                        <div class="detail-label">
+                            岗位
+                        </div>
+
+                        <div
+                            id="detailPosition"
+                            class="detail-position"
+                        >
+                            -
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="detail-grid">
+
+
+                    <div class="detail-item">
+
+                        <div class="detail-label">
+                            类别
+                        </div>
+
+                        <div id="detailCategory">
+                            -
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="detail-item">
+
+                        <div class="detail-label">
+                            城市
+                        </div>
+
+                        <div id="detailCity">
+                            -
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="detail-item">
+
+                        <div class="detail-label">
+                            当前状态
+                        </div>
+
+                        <div id="detailStatus">
+                            -
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="detail-item">
+
+                        <div class="detail-label">
+                            投递日期
+                        </div>
+
+                        <div id="detailApplyDate">
+                            -
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="detail-item">
+
+                        <div class="detail-label">
+                            投递来源
+                        </div>
+
+                        <div id="detailSource">
+                            -
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="detail-item">
+
+                        <div class="detail-label">
+                            岗位链接
+                        </div>
+
+                        <a
+                            id="detailJobUrl"
+                            class="detail-link"
+                            href="#"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            -
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="detail-section">
+
+                    <div class="detail-label">
+                        备注
+                    </div>
+
+                    <div
+                        id="detailNotes"
+                        class="detail-notes"
+                    >
+                        -
+                    </div>
+
+                </div>
+
+
+
+                <div class="detail-time">
+
+                    <div>
+
+                        <span>
+                            创建时间：
+                        </span>
+
+                        <span id="detailCreatedAt">
+                            -
+                        </span>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            更新时间：
+                        </span>
+
+                        <span id="detailUpdatedAt">
+                            -
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+<!-- 操作提示 -->
+<div id="toast" class="toast"></div>
+
+    <script src="app.js"></script>
+
+</body>
+
+</html>

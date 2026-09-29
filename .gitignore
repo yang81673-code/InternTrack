@@ -1,17 +1,25 @@
-# Python
-__pycache__/
-*.pyc
+# Python virtual environment
 .venv/
+venv/
 
-# Node.js
-node_modules/
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Local database
+*.db
+
+# VS Code
+.vscode/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
 
 # Environment variables
 .env
-
-# Database
-*.db
-
-# Operating system
-.DS_Store
-Thumbs.db
+.env.*

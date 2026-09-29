@@ -1,0 +1,1693 @@
+/* =========================================================
+   InternTrack UI 2.0
+   Modern SaaS Dashboard
+========================================================= */
+
+
+/* =========================================================
+   1. 全局设计系统
+========================================================= */
+
+:root {
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --primary-light: #eff6ff;
+
+    --success: #059669;
+    --success-light: #ecfdf5;
+
+    --warning: #ea580c;
+    --warning-light: #fff7ed;
+
+    --danger: #dc2626;
+    --danger-light: #fef2f2;
+
+    --purple: #7c3aed;
+    --purple-light: #f5f3ff;
+
+    --text-primary: #111827;
+    --text-secondary: #4b5563;
+    --text-muted: #9ca3af;
+
+    --border: #e5e7eb;
+    --border-light: #f1f5f9;
+
+    --background: #f6f8fc;
+    --surface: #ffffff;
+
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+
+    --shadow-sm:
+        0 1px 2px rgba(15, 23, 42, 0.04);
+
+    --shadow-md:
+        0 6px 20px rgba(15, 23, 42, 0.06);
+
+    --shadow-lg:
+        0 20px 50px rgba(15, 23, 42, 0.15);
+
+    --transition:
+        all 0.2s ease;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+    min-height: 100vh;
+
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        "Microsoft YaHei",
+        Arial,
+        sans-serif;
+
+    background:
+        radial-gradient(
+            circle at top left,
+            rgba(37, 99, 235, 0.035),
+            transparent 30%
+        ),
+        var(--background);
+
+    color: var(--text-primary);
+
+    line-height: 1.6;
+
+    -webkit-font-smoothing: antialiased;
+}
+
+
+
+/* =========================================================
+   2. 顶部导航栏
+========================================================= */
+
+.navbar {
+    height: 68px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 46px;
+
+    background: rgba(255, 255, 255, 0.92);
+
+    backdrop-filter: blur(14px);
+
+    border-bottom: 1px solid rgba(229, 231, 235, 0.85);
+
+    position: sticky;
+    top: 0;
+
+    z-index: 50;
+}
+
+
+.logo {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    font-size: 22px;
+    font-weight: 750;
+
+    letter-spacing: -0.5px;
+
+    color: var(--primary);
+}
+
+
+/* Logo 图形 */
+.logo::before {
+    content: "IT";
+
+    width: 34px;
+    height: 34px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #4f46e5
+        );
+
+    color: white;
+
+    font-size: 12px;
+    font-weight: 800;
+
+    letter-spacing: 0;
+}
+
+
+.nav-title {
+    padding: 7px 12px;
+
+    border-radius: 999px;
+
+    background: #f8fafc;
+
+    border: 1px solid #eef2f7;
+
+    color: var(--text-secondary);
+
+    font-size: 13px;
+}
+
+
+
+/* =========================================================
+   3. 页面主体
+========================================================= */
+
+.container {
+    width: min(1240px, calc(100% - 48px));
+
+    margin: 0 auto;
+
+    padding: 42px 0 70px;
+}
+
+
+
+/* =========================================================
+   4. 页面标题区域
+========================================================= */
+
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 24px;
+
+    margin-bottom: 30px;
+}
+
+
+.page-header h1 {
+    margin-bottom: 5px;
+
+    font-size: 32px;
+    font-weight: 750;
+
+    line-height: 1.2;
+
+    letter-spacing: -0.8px;
+
+    color: var(--text-primary);
+}
+
+
+.page-header p {
+    color: #6b7280;
+
+    font-size: 14px;
+}
+
+
+
+/* =========================================================
+   5. 新增投递按钮
+========================================================= */
+
+.add-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 44px;
+
+    padding: 0 20px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #1d4ed8
+        );
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 14px;
+    font-weight: 650;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 14px rgba(37, 99, 235, 0.22);
+
+    transition: var(--transition);
+}
+
+
+.add-button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 9px 22px rgba(37, 99, 235, 0.28);
+}
+
+
+.add-button:active {
+    transform: translateY(0);
+}
+
+
+
+/* =========================================================
+   6. Dashboard 统计卡片
+========================================================= */
+
+.stats {
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, minmax(0, 1fr));
+
+    gap: 18px;
+
+    margin-bottom: 32px;
+}
+
+
+.stat-card {
+    position: relative;
+
+    min-height: 148px;
+
+    overflow: hidden;
+
+    padding: 24px;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius-lg);
+
+    box-shadow: var(--shadow-sm);
+
+    transition: var(--transition);
+}
+
+
+.stat-card:hover {
+    transform: translateY(-3px);
+
+    border-color: #dbe4f0;
+
+    box-shadow: var(--shadow-md);
+}
+
+
+/* 卡片右上角图标 */
+
+.stat-card::before {
+    position: absolute;
+
+    top: 20px;
+    right: 20px;
+
+    width: 36px;
+    height: 36px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    font-size: 16px;
+    font-weight: 700;
+}
+
+
+/* 总投递 */
+.stat-card:nth-child(1)::before {
+    content: "Σ";
+
+    background: var(--primary-light);
+
+    color: var(--primary);
+}
+
+
+/* 已投递 */
+.stat-card:nth-child(2)::before {
+    content: "↗";
+
+    background: var(--purple-light);
+
+    color: var(--purple);
+}
+
+
+/* 面试中 */
+.stat-card:nth-child(3)::before {
+    content: "◷";
+
+    background: var(--warning-light);
+
+    color: var(--warning);
+}
+
+
+/* 已录用 */
+.stat-card:nth-child(4)::before {
+    content: "✓";
+
+    background: var(--success-light);
+
+    color: var(--success);
+}
+
+
+/* 已拒绝 */
+.stat-card:nth-child(5)::before {
+    content: "×";
+
+    background: var(--danger-light);
+
+    color: var(--danger);
+}
+
+
+.stat-title {
+    margin-bottom: 18px;
+
+    color: var(--text-secondary);
+
+    font-size: 13px;
+    font-weight: 550;
+}
+
+
+.stat-number {
+    font-size: 34px;
+    font-weight: 760;
+
+    line-height: 1;
+
+    letter-spacing: -1px;
+
+    color: var(--text-primary);
+}
+
+
+
+/* =========================================================
+   7. 投递记录主卡片
+========================================================= */
+
+.application-section {
+    overflow: hidden;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius-lg);
+
+    box-shadow:
+        0 4px 18px rgba(15, 23, 42, 0.035);
+}
+
+
+
+/* =========================================================
+   8. 投递记录 Header
+========================================================= */
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 24px;
+
+    padding: 24px 26px;
+
+    border-bottom: 1px solid var(--border);
+}
+
+
+.section-header h2 {
+    margin-bottom: 3px;
+
+    font-size: 18px;
+    font-weight: 700;
+
+    letter-spacing: -0.2px;
+}
+
+
+.section-header span {
+    color: var(--text-muted);
+
+    font-size: 12px;
+}
+
+
+
+/* =========================================================
+   9. 搜索 / 筛选 / 排序工具栏
+========================================================= */
+
+.table-tools {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+}
+
+
+.search-input,
+.status-filter,
+.sort-select {
+    height: 40px;
+
+    border: 1px solid #d8dee8;
+
+    border-radius: 9px;
+
+    background: #ffffff;
+
+    color: var(--text-secondary);
+
+    font-family: inherit;
+    font-size: 13px;
+
+    outline: none;
+
+    transition: var(--transition);
+}
+
+
+.search-input {
+    width: 260px;
+
+    padding: 0 14px 0 38px;
+
+    background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.3-4.3'/%3E%3C/svg%3E");
+
+    background-repeat: no-repeat;
+
+    background-position:
+        13px center;
+}
+
+
+.search-input::placeholder {
+    color: #a5adba;
+}
+
+
+.status-filter,
+.sort-select {
+    padding: 0 34px 0 13px;
+
+    cursor: pointer;
+}
+
+
+.search-input:hover,
+.status-filter:hover,
+.sort-select:hover {
+    border-color: #bfc9d8;
+}
+
+
+.search-input:focus,
+.status-filter:focus,
+.sort-select:focus {
+    border-color: var(--primary);
+
+    box-shadow:
+        0 0 0 3px rgba(37, 99, 235, 0.09);
+}
+
+
+
+/* =========================================================
+   10. 表格
+========================================================= */
+
+.table-container {
+    width: 100%;
+
+    overflow-x: auto;
+}
+
+
+table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    table-layout: auto;
+
+    font-size: 13px;
+}
+
+
+thead {
+    background: #f8fafc;
+}
+
+
+th {
+    padding: 14px 18px;
+
+    text-align: left;
+
+    border-bottom: 1px solid var(--border);
+
+    color: #667085;
+
+    font-size: 12px;
+    font-weight: 650;
+
+    white-space: nowrap;
+}
+
+
+td {
+    padding: 17px 18px;
+
+    border-bottom: 1px solid #f0f2f5;
+
+    color: var(--text-secondary);
+
+    vertical-align: middle;
+}
+
+
+tbody tr {
+    background: #ffffff;
+
+    transition: background-color 0.16s ease;
+}
+
+
+tbody tr:hover {
+    background: #fafcff;
+}
+
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* 公司列更突出 */
+
+tbody td:first-child {
+    color: var(--text-primary);
+
+    font-weight: 650;
+}
+
+
+/* 岗位列 */
+
+tbody td:nth-child(2) {
+    color: #374151;
+
+    font-weight: 500;
+}
+
+
+/* 日期弱化 */
+
+tbody td:nth-child(6) {
+    color: #64748b;
+
+    font-variant-numeric: tabular-nums;
+}
+
+
+
+/* =========================================================
+   11. 普通状态标签
+========================================================= */
+
+.status {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 5px 10px;
+
+    border-radius: 999px;
+
+    font-size: 12px;
+    font-weight: 550;
+
+    white-space: nowrap;
+}
+
+
+.status-applied {
+    background: var(--primary-light);
+
+    color: var(--primary);
+}
+
+
+.status-interview {
+    background: var(--warning-light);
+
+    color: var(--warning);
+}
+
+
+.status-offer {
+    background: var(--success-light);
+
+    color: var(--success);
+}
+
+
+.status-rejected {
+    background: var(--danger-light);
+
+    color: var(--danger);
+}
+
+
+
+/* =========================================================
+   12. 快速状态下拉框
+========================================================= */
+
+.quick-status-select {
+    min-width: 84px;
+
+    padding: 6px 28px 6px 11px;
+
+    border: 1px solid transparent;
+
+    border-radius: 999px;
+
+    font-family: inherit;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    outline: none;
+
+    transition: var(--transition);
+}
+
+
+.quick-status-select:hover {
+    filter: brightness(0.98);
+
+    transform: translateY(-1px);
+}
+
+
+.quick-status-select.status-applied {
+    background: var(--primary-light);
+
+    color: var(--primary);
+}
+
+
+.quick-status-select.status-interview {
+    background: var(--warning-light);
+
+    color: var(--warning);
+}
+
+
+.quick-status-select.status-offer {
+    background: var(--success-light);
+
+    color: var(--success);
+}
+
+
+.quick-status-select.status-rejected {
+    background: var(--danger-light);
+
+    color: var(--danger);
+}
+
+
+
+/* =========================================================
+   13. 详情 / 编辑 / 删除
+========================================================= */
+
+.action-button {
+    padding: 6px 8px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    background: transparent;
+
+    font-family: inherit;
+
+    font-size: 12px;
+
+    cursor: pointer;
+
+    transition: var(--transition);
+
+    white-space: nowrap;
+}
+
+
+.detail-button {
+    color: #64748b;
+}
+
+
+.detail-button:hover {
+    background: #f1f5f9;
+
+    color: #334155;
+}
+
+
+.edit-button {
+    color: var(--primary);
+}
+
+
+.edit-button:hover {
+    background: var(--primary-light);
+
+    color: var(--primary-dark);
+}
+
+
+.delete-button {
+    color: var(--danger);
+}
+
+
+.delete-button:hover {
+    background: var(--danger-light);
+
+    color: #b91c1c;
+}
+
+
+
+/* =========================================================
+   14. 弹窗背景
+========================================================= */
+
+.modal {
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    padding: 24px;
+
+    align-items: center;
+    justify-content: center;
+
+    background:
+        rgba(15, 23, 42, 0.45);
+
+    backdrop-filter: blur(3px);
+
+    z-index: 100;
+}
+
+
+.modal.show {
+    display: flex;
+
+    animation:
+        modalFadeIn
+        0.2s ease;
+}
+
+
+@keyframes modalFadeIn {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+
+}
+
+
+
+/* =========================================================
+   15. 弹窗主体
+========================================================= */
+
+.modal-content {
+    width: min(720px, 100%);
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    background: white;
+
+    border: 1px solid rgba(226, 232, 240, 0.9);
+
+    border-radius: 16px;
+
+    box-shadow: var(--shadow-lg);
+
+    animation:
+        modalContentIn
+        0.22s ease;
+}
+
+
+@keyframes modalContentIn {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(8px)
+            scale(0.985);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+
+.modal-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    padding: 24px 26px;
+
+    border-bottom: 1px solid var(--border);
+}
+
+
+.modal-header h2 {
+    margin-bottom: 3px;
+
+    font-size: 20px;
+    font-weight: 700;
+}
+
+
+.modal-header p {
+    color: var(--text-muted);
+
+    font-size: 12px;
+}
+
+
+.close-button {
+    width: 32px;
+    height: 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: transparent;
+
+    color: #64748b;
+
+    font-size: 23px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition: var(--transition);
+}
+
+
+.close-button:hover {
+    background: #f1f5f9;
+
+    color: var(--text-primary);
+}
+
+
+
+/* =========================================================
+   16. 新增 / 编辑表单
+========================================================= */
+
+#applicationForm {
+    padding: 26px;
+}
+
+
+.form-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+}
+
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+
+    margin-bottom: 18px;
+}
+
+
+.form-group label {
+    margin-bottom: 7px;
+
+    color: #374151;
+
+    font-size: 12px;
+    font-weight: 650;
+}
+
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+
+    padding: 10px 12px;
+
+    border: 1px solid #d7dee8;
+
+    border-radius: 9px;
+
+    background: #ffffff;
+
+    color: #374151;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    outline: none;
+
+    transition: var(--transition);
+}
+
+
+.form-group input,
+.form-group select {
+    min-height: 42px;
+}
+
+
+.form-group input:hover,
+.form-group select:hover,
+.form-group textarea:hover {
+    border-color: #c4ccda;
+}
+
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--primary);
+
+    box-shadow:
+        0 0 0 3px rgba(37, 99, 235, 0.09);
+}
+
+
+.form-group textarea {
+    resize: vertical;
+
+    min-height: 96px;
+}
+
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    padding-top: 2px;
+}
+
+
+.cancel-button,
+.submit-button {
+    min-height: 40px;
+
+    padding: 0 17px;
+
+    border-radius: 9px;
+
+    font-family: inherit;
+
+    font-size: 13px;
+    font-weight: 650;
+
+    cursor: pointer;
+
+    transition: var(--transition);
+}
+
+
+.cancel-button {
+    border: 1px solid #d7dee8;
+
+    background: white;
+
+    color: #475569;
+}
+
+
+.cancel-button:hover {
+    background: #f8fafc;
+}
+
+
+.submit-button {
+    border: none;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #1d4ed8
+        );
+
+    color: white;
+
+    box-shadow:
+        0 4px 10px rgba(37, 99, 235, 0.18);
+}
+
+
+.submit-button:hover {
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 6px 14px rgba(37, 99, 235, 0.24);
+}
+
+
+
+/* =========================================================
+   17. 详情弹窗
+========================================================= */
+
+.detail-modal-content {
+    max-width: 680px;
+}
+
+
+.detail-body {
+    padding: 28px;
+}
+
+
+.detail-main {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 24px;
+
+    margin-bottom: 24px;
+
+    padding-bottom: 24px;
+
+    border-bottom: 1px solid var(--border);
+}
+
+
+.detail-label {
+    margin-bottom: 5px;
+
+    color: var(--text-muted);
+
+    font-size: 11px;
+    font-weight: 500;
+}
+
+
+.detail-company {
+    color: var(--text-primary);
+
+    font-size: 22px;
+    font-weight: 750;
+}
+
+
+.detail-position {
+    color: #374151;
+
+    font-size: 17px;
+    font-weight: 650;
+}
+
+
+.detail-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 20px 32px;
+
+    margin-bottom: 26px;
+}
+
+
+.detail-item {
+    min-width: 0;
+}
+
+
+.detail-link {
+    color: var(--primary);
+
+    text-decoration: none;
+
+    word-break: break-all;
+}
+
+
+.detail-link:hover {
+    text-decoration: underline;
+}
+
+
+.detail-section {
+    margin-bottom: 24px;
+}
+
+
+.detail-notes {
+    min-height: 76px;
+
+    padding: 14px;
+
+    border: 1px solid #eef2f7;
+
+    border-radius: 10px;
+
+    background: #f8fafc;
+
+    color: #475569;
+
+    white-space: pre-wrap;
+}
+
+
+.detail-time {
+    display: flex;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding-top: 18px;
+
+    border-top: 1px solid var(--border);
+
+    color: var(--text-muted);
+
+    font-size: 11px;
+}
+
+
+
+/* =========================================================
+   18. Toast
+========================================================= */
+
+.toast {
+    position: fixed;
+
+    top: 84px;
+    right: 28px;
+
+    min-width: 230px;
+    max-width: 360px;
+
+    padding: 13px 17px;
+
+    border-radius: 10px;
+
+    color: white;
+
+    font-size: 13px;
+    font-weight: 550;
+
+    box-shadow:
+        0 12px 30px rgba(15, 23, 42, 0.16);
+
+    opacity: 0;
+
+    transform:
+        translateX(14px);
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease;
+
+    z-index: 1000;
+}
+
+
+.toast.show {
+    opacity: 1;
+
+    transform:
+        translateX(0);
+}
+
+
+.toast-success {
+    background:
+        linear-gradient(
+            135deg,
+            #059669,
+            #047857
+        );
+}
+
+
+.toast-error {
+    background:
+        linear-gradient(
+            135deg,
+            #dc2626,
+            #b91c1c
+        );
+}
+
+
+
+/* =========================================================
+   19. 加载 / 空状态
+========================================================= */
+
+.empty-cell {
+    padding: 0;
+}
+
+
+.empty-state {
+    min-height: 220px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 38px 20px;
+
+    text-align: center;
+}
+
+
+.empty-icon {
+    margin-bottom: 12px;
+
+    font-size: 30px;
+}
+
+
+.empty-title {
+    margin-bottom: 5px;
+
+    color: var(--text-primary);
+
+    font-size: 15px;
+    font-weight: 650;
+}
+
+
+.empty-description {
+    margin-bottom: 18px;
+
+    color: var(--text-muted);
+
+    font-size: 12px;
+}
+
+
+.clear-filter-button {
+    min-height: 36px;
+
+    padding: 0 14px;
+
+    border: 1px solid #d7dee8;
+
+    border-radius: 8px;
+
+    background: white;
+
+    color: #475569;
+
+    font-family: inherit;
+
+    font-size: 12px;
+
+    cursor: pointer;
+
+    transition: var(--transition);
+}
+
+
+.clear-filter-button:hover {
+    border-color: var(--primary);
+
+    color: var(--primary);
+
+    background: var(--primary-light);
+}
+
+
+.loading-state {
+    min-height: 190px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 14px;
+
+    color: #64748b;
+
+    font-size: 13px;
+}
+
+
+.loading-spinner {
+    width: 30px;
+    height: 30px;
+
+    border: 3px solid #e6ebf1;
+
+    border-top-color: var(--primary);
+
+    border-radius: 50%;
+
+    animation:
+        interntrack-spin
+        0.75s linear infinite;
+}
+
+
+@keyframes interntrack-spin {
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+
+/* =========================================================
+   20. 滚动条
+========================================================= */
+
+::-webkit-scrollbar {
+    width: 9px;
+    height: 9px;
+}
+
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+
+    border-radius: 999px;
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+
+
+/* =========================================================
+   21. 平板适配
+========================================================= */
+
+@media (max-width: 1050px) {
+
+    .stats {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+    }
+
+}
+
+
+@media (max-width: 850px) {
+
+    .navbar {
+        padding: 0 24px;
+    }
+
+
+    .container {
+        width: min(
+            100% - 32px,
+            1240px
+        );
+
+        padding-top: 30px;
+    }
+
+
+    .stats {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+
+    .section-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+
+    .table-tools {
+        width: 100%;
+
+        justify-content: flex-start;
+    }
+
+
+    .search-input {
+        flex: 1;
+
+        min-width: 220px;
+    }
+
+}
+
+
+
+/* =========================================================
+   22. 手机适配
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .navbar {
+        height: 60px;
+
+        padding: 0 16px;
+    }
+
+
+    .logo {
+        font-size: 18px;
+    }
+
+
+    .logo::before {
+        width: 30px;
+        height: 30px;
+
+        border-radius: 8px;
+    }
+
+
+    .nav-title {
+        display: none;
+    }
+
+
+    .container {
+        width: calc(100% - 24px);
+
+        padding:
+            24px 0 50px;
+    }
+
+
+    .page-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+
+    .page-header h1 {
+        font-size: 27px;
+    }
+
+
+    .add-button {
+        width: 100%;
+    }
+
+
+    .stats {
+        grid-template-columns: 1fr;
+
+        gap: 12px;
+    }
+
+
+    .stat-card {
+        min-height: 120px;
+    }
+
+
+    .section-header {
+        padding: 20px;
+    }
+
+
+    .table-tools {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+
+    .search-input,
+    .status-filter,
+    .sort-select {
+        width: 100%;
+    }
+
+
+    .form-grid {
+        grid-template-columns: 1fr;
+
+        gap: 0;
+    }
+
+
+    .detail-main,
+    .detail-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .detail-time {
+        flex-direction: column;
+
+        gap: 5px;
+    }
+
+
+    .modal {
+        padding: 12px;
+    }
+
+
+    .modal-content {
+        border-radius: 14px;
+    }
+
+
+    #applicationForm,
+    .detail-body {
+        padding: 20px;
+    }
+
+
+    .toast {
+        left: 14px;
+        right: 14px;
+
+        top: 72px;
+
+        max-width: none;
+    }
+
+}
